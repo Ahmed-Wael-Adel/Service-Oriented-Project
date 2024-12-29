@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MediaModule } from './media/media.module';
 import { stationeryModule } from './stationery/stationery.module';
+import { AuthModule } from './auth/auth.module';
 import * as dotenv from 'dotenv'; // Import dotenv
 dotenv.config();
 
@@ -14,6 +15,7 @@ dotenv.config();
     MongooseModule.forRoot(process.env.DB),
     MediaModule,
     stationeryModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
