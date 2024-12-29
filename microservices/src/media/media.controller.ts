@@ -36,18 +36,18 @@ export class MediaController {
         return await this.MediaService.findAll();
     }
 
-    @Put('/update:name')
-    async update(@Param('name') name: string, @Body() updateMediaDto: Media): Promise<{message: string, media: Media}> {
-        const media = await this.MediaService.update(name, updateMediaDto);
+    @Put('update/:id')
+    async update(@Param('id') id: string, @Body() updateMediaDto: Media): Promise<{message: string, media: Media}> {
+        const media = await this.MediaService.update(id, updateMediaDto);
         return{
             message: "media Updated",
             media: media
         }
     }
 
-    @Delete('delete')
-    async delete(@Body('name') name: string): Promise<{message: string}>{
-        const media = await this.MediaService.delete(name)
+    @Delete('delete/:id')
+    async delete(@Param('id') id: string): Promise<{message: string}>{
+        const media = await this.MediaService.delete(id)
         if(media == true)
         {
             return{

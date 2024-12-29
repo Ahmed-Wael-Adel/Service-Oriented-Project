@@ -23,13 +23,13 @@ export class MediaService {
         return await this.MediaModel.find().exec();
     }
     
-    async update(name: string, media: Media): Promise<Media> {
-        return await this.MediaModel.findOneAndUpdate({name}, media, { new: true }).exec();
+    async update(id: string, media: Media): Promise<Media> {
+        return await this.MediaModel.findByIdAndUpdate(id, media, { new: true }).exec();
     }
 
     
-    async delete(name: string): Promise<boolean> {
-        const isDeleted = await this.MediaModel.deleteOne({name}).exec();
+    async delete(id: string): Promise<boolean> {
+        const isDeleted = await this.MediaModel.findByIdAndDelete(id).exec();
         if (isDeleted)
         {
             return  true
