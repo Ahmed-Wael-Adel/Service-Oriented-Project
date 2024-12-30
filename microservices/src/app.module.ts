@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { MediaModule } from './media/media.module';
 import { stationeryModule } from './stationery/stationery.module';
 import { AuthModule } from './auth/auth.module';
+import { BooksModule } from './books/books.module';
 import * as dotenv from 'dotenv'; // Import dotenv
 dotenv.config();
 
@@ -16,6 +17,7 @@ dotenv.config();
     MediaModule,
     stationeryModule,
     AuthModule,
+    BooksModule,
   ],
   controllers: [AppController],
   providers: [AppService],
