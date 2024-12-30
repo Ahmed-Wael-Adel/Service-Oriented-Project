@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () =>{
     return(
-        <div>
-            <Link to="/Book">Books</Link>
-            <Link to="/Media">Media</Link>
-            <Link to="/Staionery">Staionery</Link>
+        <div className='flex flex-row justify-center bg-blue-300 '>
+            <Link to="/Book" className='  hover:bg-blue-900 '>Books</Link>
+            <Link to="/Media" className='hover:bg-blue-900'>Media</Link>
+            <Link to="/Staionery" className='hover:bg-blue-900'>Staionery</Link>
         </div>
     )
 }

@@ -34,7 +34,7 @@ const Media = () => {
     }
 
     const handleHome = () =>{
-        navigate(-1)
+        navigate("/Home")
     }
 
     return(
