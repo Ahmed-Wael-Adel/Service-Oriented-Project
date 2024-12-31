@@ -14,6 +14,7 @@ import Book from './Pages/Book';
 import Stationery from './Pages/Stationery';
 import AddStationery from './Pages/AddStationery';
 import UpdateStationery from './Pages/UpdateStationery';
+import UpdateBook from './Pages/UpdateBook';
 
 function App() {
   
@@ -30,6 +31,7 @@ function App() {
           <Route path="AddStationery" element={<AddStationery/>}/>
           <Route path="AddBook" element={<AddBook/>}/>
           <Route path="UpdateMedia" element={<UpdateMedia/>}/>
+          <Route path="UpdateBook" element={<UpdateBook/>}/>
           <Route path="UpdateStationery" element={<UpdateStationery/>}/>
           <Route path='login' element={<Login/>}/>
           <Route path='signup' element={<Signup/>}/>

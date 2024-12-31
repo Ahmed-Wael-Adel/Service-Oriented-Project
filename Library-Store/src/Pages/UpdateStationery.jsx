@@ -46,7 +46,7 @@ const UpdateStationery = () => {
     return(
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
             <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-md">
-                <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">Add Stetionery</h2>
+                <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">Update Stetionery</h2>
                 <div className="flex flex-col space-y-4 text-left">
                     <label className="text-sm font-medium text-gray-600">
                         Name

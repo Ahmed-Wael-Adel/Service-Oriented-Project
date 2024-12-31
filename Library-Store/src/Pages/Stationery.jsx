@@ -31,7 +31,7 @@ const Stationery = () => {
 
     const handleDelete = async(id) => {
         const response = await axios.delete(`http://localhost:3000/stationery/delete/${id}`)
-        //setStationery((prevStationery) => prevStationery.filter((item) => item._id !== id));
+        setStationery((prevStationery) => prevStationery.filter((item) => item._id !== id));
     }
 
     const handleHome = () =>{

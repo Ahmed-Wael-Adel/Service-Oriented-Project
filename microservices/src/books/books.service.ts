@@ -1,39 +1,30 @@
-import { Injectable,Inject ,NotFoundException} from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import { Injectable,Inject } from '@nestjs/common';
 import { Model } from 'mongoose';
-import { Book} from './book.schema'; // Path to your Book schema
+import { Book } from './book.model'; 
 
 @Injectable()
-export class BooksService {
-  constructor(
-    @Inject('BookModel') private  readonly bookModel: Model<Book>, // Injecting model with the connection name
-  ) {}
-  
-  // Find all books
+export class BookService {
+  constructor(@Inject('BookModel') private readonly bookModel: Model<Book>) {}
+
+  async create(book: Book): Promise<Book> {
+    const newBook = new this.bookModel(book);
+    return await newBook.save();
+  }
+
   async findAll(): Promise<Book[]> {
-    return this.bookModel.find().exec();
+    return await this.bookModel.find().exec();
   }
 
-  // Create a new book
-  async create(createBookDto: { title: string; author: string; publishedYear: number }): Promise<Book> {
-    const newBook = new this.bookModel(createBookDto);
-    return newBook.save();
+  async findOne(id: string): Promise<Book> {
+    return await this.bookModel.findById(id).exec();
   }
 
-  // Update a book
-  async update(id: string, updateBookDto: { title?: string; author?: string; publishedYear?: number }): Promise<Book> {
-    const book = await this.bookModel.findByIdAndUpdate(id, updateBookDto, { new: true });
-    if (!book) {
-      throw new NotFoundException(`Book with ID ${id} not found`);
-    }
-    return book;
+  async update(id: string, book: Book): Promise<Book> {
+    return await this.bookModel.findByIdAndUpdate(id, book, { new: true }).exec();
   }
 
-  // Delete a book
-  async remove(id: string): Promise<{ message: string }> {
-    const deletedBook = await this.bookModel.findByIdAndDelete(id);
-    if (!deletedBook) {
-      throw new NotFoundException(`Book with ID ${id} not found`);
-    }
-    return { message: `Book with ID ${id} deleted successfully` };
+  async delete(id: string): Promise<any> {
+    return await this.bookModel.deleteOne({ _id: id }).exec();
   }
 }

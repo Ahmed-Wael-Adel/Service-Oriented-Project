@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { BooksService } from './books.service';
-import { BooksController } from './books.controller';
-import { BookSchema } from './book.schema';
+import { BookController } from './books.controller';
+import { BookService } from './books.service';
+import { BookSchema } from './book.model'; 
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: 'Book', schema: BookSchema }]),
+    MongooseModule.forFeature([{ name: 'Book', schema: BookSchema }]), 
   ],
-  providers: [BooksService],
-  controllers: [BooksController],
+  controllers: [BookController],
+  providers: [BookService],
 })
-export class BooksModule {}
+export class BookModule {}

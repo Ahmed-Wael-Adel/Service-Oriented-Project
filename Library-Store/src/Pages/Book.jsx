@@ -8,7 +8,7 @@
         const [book, setBook] = useState([]);
 
         useEffect(() => {
-            const response = async () => await axios.get("http://localhost:3000/books/")
+            const response = async () => await axios.get("http://localhost:3000/book/")
             .then( response => {
                 setBook(response.data);
                 console.log("=====>", response.data);
@@ -30,7 +30,7 @@
         }
 
         const handleDelete = async(id) => {
-            const response = await axios.delete(`http://localhost:3000/books/delete/${id}`)
+            const response = await axios.delete(`http://localhost:3000/book/delete/${id}`)
             setBook((prevBook) => prevBook.filter((item) => item._id !== id));
         }
 
@@ -43,9 +43,9 @@
                 {book.map((x) => (
                     <div key={x._id} className=" flex flex-row justify-between border-solid border-black rounded-lg text-left m-5 text border border-zinc-300 rounded-lg bg-gray p-5">
                         <div className="font-bold">
-                            <h1 className="text-black ">Title: {x.title}</h1>
-                            <h1>Auther: {x.auther}</h1>
-                            <h1>Published Year: {x.publishedYear}</h1>
+                            <h1 className="text-black ">Name: {x.name}</h1>
+                            <h1>Description: {x.description}</h1>
+                            <h1>Price: {x.price}</h1>
                         </div>
                         <div className=" flex flex-row jsutify-between mr-5 items-center">
                             <button className="mr-10 bg-blue-800 hover:bg-blue-900 h-12 w-20 text-white rounded"

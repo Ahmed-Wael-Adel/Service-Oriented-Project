@@ -1,34 +1,42 @@
+/* eslint-disable prettier/prettier */
 import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
-import { BooksService } from './books.service'; // Path to your BooksService
+import { BookService } from './books.service';
+import { Book } from './book.model';
 
-@Controller('books')
-export class BooksController {
-  constructor(private readonly booksService: BooksService) {}
+@Controller('book')
+export class BookController {
+    constructor(private readonly bookService: BookService) { }
 
-  // GET all books
-  @Get()
-  async findAll() {
-    return this.booksService.findAll();
-  }
+    @Post("add")
+    async create(@Body() createBookDto: Book): Promise<{book: Book, message: String}> {
+        const book = await this.bookService.create(createBookDto);
+        return{
+          book: book,
+          message: "Book Added"
+        }
+    }
 
-  // POST create a new book
-  @Post()
-  async create(@Body() createBookDto: { title: string; author: string; publishedYear: number }) {
-    return this.booksService.create(createBookDto);
-  }
+    @Get("/")
+    async findAll(): Promise<Book[]> {
+        return this.bookService.findAll();
+    }
 
-  // PUT update a book
-  @Put(':id')
-  async update(
-    @Param('id') id: string,
-    @Body() updateBookDto: { title?: string; author?: string; publishedYear?: number }
-  ) {
-    return this.booksService.update(id, updateBookDto);
-  }
+    @Get('/:id')
+    async findOne(@Param('id') id: string): Promise<Book> {
+        return this.bookService.findOne(id);
+    }
 
-  // DELETE a book
-  @Delete(':id')
-  async remove(@Param('id') id: string) {
-    return this.booksService.remove(id);
-  }
+    @Put('update/:id')
+    async update(@Param('id') id: string, @Body() updateBookDto: Book): Promise<{book: Book, message: String}> {
+        const book = await this.bookService.update(id, updateBookDto);
+        return{
+          message: "Book Updated",
+          book: book
+        }
+    }
+
+    @Delete('delete/:id')
+    async remove(@Param('id') id: string): Promise<any> {
+        return this.bookService.delete(id);
+    }
 }
