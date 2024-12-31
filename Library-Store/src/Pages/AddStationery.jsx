@@ -1,48 +1,41 @@
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import { useState } from "react";
-import { useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom"; 
 
-const UpdateMedia = () => {
+const AddStationery = () => {
 
     const navigate = useNavigate();
-    const location = useLocation();
-    const media = location.state
     const [name, setName] = useState("");
-    const [publisher, setPublisher] = useState("");
     const [description, setDescription] = useState("");
-    const [type, setType] = useState("");
     const [price, setPrice] = useState();
     const [error, setError] = useState("");
-
     
 
-    const handleUpdate = async() => {
-        if ( name != "" && publisher != "" && description != "" && type != "" && price != "")
+
+    const handleAdd = async() => {
+        if ( name != "" && description != "" && price != "")
         {
-            const response = await axios.put(`http://localhost:3000/media/update/${media._id}`, {
+            const response = await axios.post("http://localhost:3000/stationery/add", {
                 name,
-                publisher,
                 description,
-                type,
                 price
             });
-
-            if (response.data.message === "media Updated")
+    
+            if (response.data.message === "Stationery Added")
             {
                 navigate(-1)
             }
+            else
+            {
+    
+            }
         }
+        else
+        {
+            setError("Fill All Feilds")
+        }
+        
     }
-
-    useEffect(()=>{
-        setName(media.name)
-        setPublisher(media.publisher)
-        setDescription(media.description)
-        setType(media.type)
-        setPrice(media.price)
-    },[])
 
     return(
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
@@ -59,15 +52,6 @@ const UpdateMedia = () => {
                         onChange={(e) => setName(e.target.value)}
                     />
                     <label className="text-sm font-medium text-gray-600">
-                        Publisher
-                    </label>
-                    <input 
-                        className="w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" 
-                        value={publisher}
-                        placeholder="Publisher"
-                        onChange={(e) => setPublisher(e.target.value)}
-                    />
-                    <label className="text-sm font-medium text-gray-600">
                         Description
                     </label>
                     <input 
@@ -75,15 +59,6 @@ const UpdateMedia = () => {
                         value={description}
                         placeholder="Description"
                         onChange={(e) => setDescription(e.target.value)}
-                    />
-                    <label className="text-sm font-medium text-gray-600">
-                        Type
-                    </label>
-                    <input 
-                        className="w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" 
-                        value={type}
-                        placeholder="Type"
-                        onChange={(e) => setType(e.target.value)}
                     />
                     <label className="text-sm font-medium text-gray-600">
                         Price
@@ -98,8 +73,8 @@ const UpdateMedia = () => {
                     <h1 className="text-red-700">{error}</h1>
                     <button 
                         className="w-full px-4 py-2 font-semibold text-white bg-blue-600 rounded-lg shadow hover:bg-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none"
-                        onClick={handleUpdate}>
-                        Update
+                        onClick={handleAdd}>
+                        ADD
                     </button>
                 </div>
             </div>
@@ -108,4 +83,4 @@ const UpdateMedia = () => {
 
 }
 
-export default UpdateMedia;
+export default AddStationery;

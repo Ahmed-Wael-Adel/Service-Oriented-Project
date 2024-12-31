@@ -4,6 +4,7 @@ import { Schema,Document,model } from 'mongoose';
 export interface stationery extends Document {
   readonly name: string;
   readonly description: string;
+  readonly price: number;
 }
 
 export const stationerySchema = new Schema({
@@ -13,6 +14,10 @@ export const stationerySchema = new Schema({
   },
   description: {
     type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
     required: true,
   }
 });

@@ -2,39 +2,32 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; 
 
-const AddMedia = () => {
+const AddBook = () => {
 
     const navigate = useNavigate();
-    const [name, setName] = useState("");
-    const [publisher, setPublisher] = useState("");
-    const [description, setDescription] = useState("");
-    const [type, setType] = useState("");
+    const [title, setTitle] = useState("");
+    const [auther, setAuther] = useState("");
+    const [publishedYear, setPublishedYear] = useState("");
     const [price, setPrice] = useState();
-    const [error, setError] = useState("");
+    
 
 
     const handleAdd = async() => {
-        if ( name != "" && publisher != "" && description != "" && type != "" && price != "")
+        const response = await axios.post("http://localhost:3000/books/add", {
+            title,
+            auther,
+            publishedYear,
+            price
+        });
+
+        if (response.data.message === "Book Added")
         {
-            const response = await axios.post("http://localhost:3000/media/add", {
-                name,
-                publisher,
-                description,
-                type,
-                price
-            });
-    
-            if (response.data.message === "Media Added")
-            {
-                navigate(-1)
-            }
-            else
-            {
-    
-            }
+            navigate(-1)
         }
-        setError("Fill All Fields")
-        
+        else
+        {
+
+        }
     }
 
     return(
@@ -43,40 +36,31 @@ const AddMedia = () => {
                 <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">Add Media</h2>
                 <div className="flex flex-col space-y-4 text-left">
                     <label className="text-sm font-medium text-gray-600">
-                        Name
+                        Title
                     </label>
                     <input 
                         className="w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" 
-                        value={name}
-                        placeholder="Name"
-                        onChange={(e) => setName(e.target.value)}
+                        value={title}
+                        placeholder="Title"
+                        onChange={(e) => setTitle(e.target.value)}
                     />
                     <label className="text-sm font-medium text-gray-600">
-                        Publisher
+                        Auther
                     </label>
                     <input 
                         className="w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" 
-                        value={publisher}
-                        placeholder="Publisher"
-                        onChange={(e) => setPublisher(e.target.value)}
+                        value={auther}
+                        placeholder="Auther"
+                        onChange={(e) => setAuther(e.target.value)}
                     />
                     <label className="text-sm font-medium text-gray-600">
-                        Description
+                        Published Year
                     </label>
                     <input 
                         className="w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" 
-                        value={description}
-                        placeholder="Description"
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                    <label className="text-sm font-medium text-gray-600">
-                        Type
-                    </label>
-                    <input 
-                        className="w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" 
-                        value={type}
-                        placeholder="Type"
-                        onChange={(e) => setType(e.target.value)}
+                        value={publishedYear}
+                        placeholder="PublishedYear"
+                        onChange={(e) => setPublishedYear(e.target.value)}
                     />
                     <label className="text-sm font-medium text-gray-600">
                         Price
@@ -88,7 +72,6 @@ const AddMedia = () => {
                         onChange={(e) => setPrice(e.target.value)}
                         type="number"
                     />
-                    <h1 className="text-red-700">{error}</h1>
                     <button 
                         className="w-full px-4 py-2 font-semibold text-white bg-blue-600 rounded-lg shadow hover:bg-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none"
                         onClick={handleAdd}>
@@ -101,4 +84,4 @@ const AddMedia = () => {
 
 }
 
-export default AddMedia;
+export default AddBook;

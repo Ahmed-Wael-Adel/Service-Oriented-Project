@@ -7,8 +7,12 @@ import { stationery } from './stationery.model';
 export class stationeryController {
     constructor(private readonly stationeryService: stationeryService) { }
     @Post("add")
-    async create(@Body() createstationeryDto: stationery): Promise<stationery> {
-        return this.stationeryService.create(createstationeryDto);
+    async create(@Body() createstationeryDto: stationery): Promise<{stationery: stationery, message: String}> {
+        const stationery = await this.stationeryService.create(createstationeryDto);
+        return{
+            stationery: stationery,
+            message: "Stationery Added"
+        }
     }
 
     @Get()
@@ -21,12 +25,16 @@ export class stationeryController {
         return this.stationeryService.findOne(id);
     }
 
-    @Put(':id')
-    async update(@Param('id') id: string, @Body() updatestationeryDto: stationery): Promise<stationery> {
-        return this.stationeryService.update(id, updatestationeryDto);
+    @Put('/update/:id')
+    async update(@Param('id') id: string, @Body() updatestationeryDto: stationery): Promise<{stationery: stationery, message: String}> {
+        const stationery = await this.stationeryService.update(id, updatestationeryDto);
+        return{
+            stationery: stationery,
+            message: "Stationery Updated"
+        }
     }
 
-    @Delete(':id')
+    @Delete('/delete/:id')
     async remove(@Param('id') id: string): Promise<any> {
         return this.stationeryService.delete(id);
     }

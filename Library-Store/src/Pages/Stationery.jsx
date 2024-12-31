@@ -2,19 +2,19 @@ import React,{ useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios"
 
-const Media = () => {
+const Stationery = () => {
 
     const navigate = useNavigate(); 
-    const [media, setMedia] = useState([]);
+    const [Stationery, setStationery] = useState([]);
 
     useEffect(() => {
-        const response = async () => await axios.get("http://localhost:3000/media/")
+        const response = async () => await axios.get("http://localhost:3000/stationery/")
         .then( response => {
-            setMedia(response.data);
+            setStationery(response.data);
             console.log("=====>", response.data);
         })
         .catch(error => {
-            console.log('Error fetching Media', error);
+            console.log('Error fetching stationery', error);
         });
 
         response()
@@ -22,16 +22,16 @@ const Media = () => {
     }, []);
 
     const handleAdd = () =>{
-        navigate("/AddMedia")
+        navigate("/AddStationery")
     }
 
     const handleUpdate = (x) => {
-        navigate("/UpdateMedia", { state: x })
+        navigate("/UpdateStationery", { state: x })
     }
 
     const handleDelete = async(id) => {
-        const response = await axios.delete(`http://localhost:3000/media/delete/${id}`)
-        setMedia((prevMedia) => prevMedia.filter((item) => item._id !== id));
+        const response = await axios.delete(`http://localhost:3000/stationery/delete/${id}`)
+        //setStationery((prevStationery) => prevStationery.filter((item) => item._id !== id));
     }
 
     const handleHome = () =>{
@@ -40,14 +40,12 @@ const Media = () => {
 
     return(
         <div className="">
-            {media.map((x) => (
+            {Stationery.map((x) => (
                 <div key={x._id} className=" flex flex-row justify-between border-solid border-black rounded-lg text-left m-5 text border border-zinc-300 rounded-lg bg-gray p-5">
                     <div className="font-bold">
                         <h1 className="text-black ">Name: {x.name}</h1>
-                        <h1>Publisher: {x.publisher}</h1>
                         <h1>Description: {x.description}</h1>
-                        <h1>Price: {x.price}$</h1>
-                        <h1>Type: {x.type}</h1>
+                        <h1>Price: {x.price}</h1>
                     </div>
                     <div className=" flex flex-row jsutify-between mr-5 items-center">
                         <button className="mr-10 bg-blue-800 hover:bg-blue-900 h-12 w-20 text-white rounded"
@@ -77,4 +75,4 @@ const Media = () => {
 
 }
 
-export default Media;
+export default Stationery;

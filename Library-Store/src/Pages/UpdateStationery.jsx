@@ -4,50 +4,49 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 
-const UpdateMedia = () => {
+const UpdateStationery = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const media = location.state
+    const stetionery = location.state
     const [name, setName] = useState("");
-    const [publisher, setPublisher] = useState("");
     const [description, setDescription] = useState("");
-    const [type, setType] = useState("");
     const [price, setPrice] = useState();
     const [error, setError] = useState("");
 
     
 
     const handleUpdate = async() => {
-        if ( name != "" && publisher != "" && description != "" && type != "" && price != "")
+        if ( name != "" && description != "" && price != "")
         {
-            const response = await axios.put(`http://localhost:3000/media/update/${media._id}`, {
+            const response = await axios.put(`http://localhost:3000/stationery/update/${stetionery._id}`, {
                 name,
-                publisher,
                 description,
-                type,
                 price
-            });
-
-            if (response.data.message === "media Updated")
+            })
+            if (response.data.message === "Stationery Updated")
             {
                 navigate(-1)
             }
         }
+        else
+        {
+            setError("Fill All The Filds")
+        }
+
+
     }
 
     useEffect(()=>{
-        setName(media.name)
-        setPublisher(media.publisher)
-        setDescription(media.description)
-        setType(media.type)
-        setPrice(media.price)
+        setName(stetionery.name)
+        setDescription(stetionery.description)
+        setPrice(stetionery.price)
     },[])
 
     return(
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
             <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-md">
-                <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">Add Media</h2>
+                <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">Add Stetionery</h2>
                 <div className="flex flex-col space-y-4 text-left">
                     <label className="text-sm font-medium text-gray-600">
                         Name
@@ -59,15 +58,6 @@ const UpdateMedia = () => {
                         onChange={(e) => setName(e.target.value)}
                     />
                     <label className="text-sm font-medium text-gray-600">
-                        Publisher
-                    </label>
-                    <input 
-                        className="w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" 
-                        value={publisher}
-                        placeholder="Publisher"
-                        onChange={(e) => setPublisher(e.target.value)}
-                    />
-                    <label className="text-sm font-medium text-gray-600">
                         Description
                     </label>
                     <input 
@@ -75,15 +65,6 @@ const UpdateMedia = () => {
                         value={description}
                         placeholder="Description"
                         onChange={(e) => setDescription(e.target.value)}
-                    />
-                    <label className="text-sm font-medium text-gray-600">
-                        Type
-                    </label>
-                    <input 
-                        className="w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none" 
-                        value={type}
-                        placeholder="Type"
-                        onChange={(e) => setType(e.target.value)}
                     />
                     <label className="text-sm font-medium text-gray-600">
                         Price
@@ -108,4 +89,4 @@ const UpdateMedia = () => {
 
 }
 
-export default UpdateMedia;
+export default UpdateStationery;
