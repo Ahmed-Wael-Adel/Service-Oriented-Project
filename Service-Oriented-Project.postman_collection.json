@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "6a67e267-5726-46be-aa7d-e3b53f047308",
+		"name": "Service-Oriented-Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39437556"
+	},
+	"item": [
+		{
+			"name": "Media",
+			"item": [
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"YOU\",\r\n    \"publisher\": \"James Arthur\",\r\n    \"description\": \"year: 2019, Album feature 17 songs\",\r\n    \"type\": \"CD\",\r\n    \"price\": 20.9\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/media/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"media",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/media/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"media",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SearchByName",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"YOU\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/media/searchByName",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"media",
+								"searchByName"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Media",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"YOU\",\r\n    \"publisher\": \"James Arthur\",\r\n    \"description\": \"Year: 2019, Album Features 17 songs\",\r\n    \"type\": \"CD\",\r\n    \"price\": 31.9\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/media/update/6771cad93a5dc546c43880dd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"media",
+								"update",
+								"6771cad93a5dc546c43880dd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Media",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/media/delete/6771cad93a5dc546c43880dd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"media",
+								"delete",
+								"6771cad93a5dc546c43880dd"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
